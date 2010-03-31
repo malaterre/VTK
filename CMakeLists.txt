@@ -1395,7 +1395,9 @@ IF(NOT VTK_INSTALL_NO_DEVELOPMENT)
 ENDIF(NOT VTK_INSTALL_NO_DEVELOPMENT)
 
 # Save library dependencies.
-EXPORT_LIBRARY_DEPENDENCIES(${VTK_BINARY_DIR}/VTKLibraryDepends.cmake)
+#EXPORT_LIBRARY_DEPENDENCIES(${VTK_BINARY_DIR}/VTKLibraryDepends.cmake)
+install(EXPORT VTKTargets
+  DESTINATION ${VTK_INSTALL_PACKAGE_DIR_CM24})
 
 
 # Install some files.
@@ -1428,7 +1430,8 @@ IF(NOT VTK_INSTALL_NO_DEVELOPMENT)
 
   SET(__inst_files
     ${VTK_BINARY_DIR}/UseVTK.cmake
-    ${VTK_BINARY_DIR}/VTKLibraryDepends.cmake)
+    # ${VTK_BINARY_DIR}/VTKLibraryDepends.cmake
+    )
   IF(VTK_WRAP_HINTS)
     SET(__inst_files ${__inst_files} ${VTK_WRAP_HINTS})
   ENDIF(VTK_WRAP_HINTS)

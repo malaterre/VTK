@@ -68,6 +68,7 @@ endif ( VTK_INSTALL_INCLUDE_DIR_CM24 )
 # Library:
 if ( NOT VTK_INSTALL_NO_LIBRARIES )
   install( TARGETS vtkalglib
+    EXPORT ${ALGLIB_EXPORT_NAME}
     RUNTIME DESTINATION ${alglib_install_bin_dir} COMPONENT RuntimeLibraries
     LIBRARY DESTINATION ${alglib_install_lib_dir} COMPONENT RuntimeLibraries
     ARCHIVE DESTINATION ${alglib_install_lib_dir} COMPONENT Development

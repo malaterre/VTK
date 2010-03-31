@@ -144,6 +144,7 @@ if ( VERDICT_MANGLE )
 endif ( VERDICT_MANGLE )
 
 install(TARGETS ${verdict_LIBRARY}
+      EXPORT ${VERDICT_EXPORT_NAME}
       RUNTIME DESTINATION ${verdict_INSTALL_BIN_DIR} COMPONENT RuntimeLibraries # .exe, .dll
       LIBRARY DESTINATION ${verdict_INSTALL_LIB_DIR} COMPONENT RuntimeLibraries # .so, mod.dll
       ARCHIVE DESTINATION ${verdict_INSTALL_LIB_DIR} COMPONENT Development      # .a, .lib

@@ -48,6 +48,7 @@ ENDMACRO(VTK_THIRD_PARTY_INCLUDE2)
 #-----------------------------------------------------------------------------
 MACRO(VTK_THIRD_PARTY_SUBDIR upper lower)
   IF(NOT VTK_USE_SYSTEM_${upper})
+    SET(${upper}_EXPORT_NAME VTKTargets)
     SUBDIRS(${lower})
   ENDIF(NOT VTK_USE_SYSTEM_${upper})
 ENDMACRO(VTK_THIRD_PARTY_SUBDIR)
