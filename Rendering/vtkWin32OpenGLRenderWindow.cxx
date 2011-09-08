@@ -60,11 +60,11 @@ vtkWin32OpenGLRenderWindow::vtkWin32OpenGLRenderWindow()
 vtkWin32OpenGLRenderWindow::~vtkWin32OpenGLRenderWindow()
 {
   this->Finalize();
-  
+
   vtkRenderer *ren;
-  vtkCollectionSimpleIterator rsit;
-  for (this->Renderers->InitTraversal(rsit); 
-       (ren = this->Renderers->GetNextRenderer(rsit));)
+  vtkCollectionSimpleIterator rit;
+  this->Renderers->InitTraversal(rit);
+  while ( (ren = this->Renderers->GetNextRenderer(rit)) )
     {
     ren->SetRenderWindow(NULL);
     }
@@ -346,10 +346,14 @@ void vtkWin32OpenGLRenderWindow::Frame(void)
   this->MakeCurrent();
   if (!this->AbortRender && this->DoubleBuffer && this->SwapBuffers)
     {
-    // use global scope to get Win32 API SwapBuffers and not be
-    // confused with this->SwapBuffers
-    ::SwapBuffers(this->DeviceContext);
-    vtkDebugMacro(<< " SwapBuffers\n");
+    // If this check is not enforced, we crash in offscreen rendering
+    if (this->DeviceContext)
+      {
+      // use global scope to get Win32 API SwapBuffers and not be
+      // confused with this->SwapBuffers
+      ::SwapBuffers(this->DeviceContext);
+      vtkDebugMacro(<< " SwapBuffers\n");
+      }
     }
   else
     {
